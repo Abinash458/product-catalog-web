@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+//import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import BtnContainer from './Button'
 import { Card } from 'antd';
 
 class Product extends Component {
@@ -10,14 +11,18 @@ class Product extends Component {
             <div style={{ width: '30%', padding: 10, marginright: 10 }}>
                 <Card>
                     <div style={{ display: 'flex' }}>
-                        <img src={imageUrl} style={{ height: 100, width: 100 }} alt='No image' />
+                        <img src={imageUrl} alt="Noimage" style={{ height: 100, width: 100 }} />
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <h5>{name}</h5>
                             <h6><strong>Rs. {price}</strong></h6>
                         </div>
-                        
                     </div>
-                </Card>
+                    <Link to="/details">
+                        <BtnContainer style={{ fontSize: 'small'}}>
+                            Learn More
+                        </BtnContainer>
+                    </Link>
+                    </Card>
             </div>
 
         );

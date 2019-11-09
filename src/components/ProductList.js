@@ -33,7 +33,7 @@ class ProductList extends Component {
 
   //returning the promise
   loadData = async () => {
-    const response = await axios.get('http://localhost:5000/products');
+    const response = await axios.get('http://localhost:3002/products');
     const { data: { products } = {} } = response;
     this.setState({ products });
   }
@@ -51,7 +51,7 @@ class ProductList extends Component {
         <div className="py-5">
           <div className="container">
             <Title name="Product " name2="Catalog" />
-              <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', textAlign: 'center' }}>
                 {this.listProduct()}
               </div>
           </div>

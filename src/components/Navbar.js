@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import BtnContainer from './Button';
-//import AddPostModal from './AddPostModal';
-import { Modal, Button, Input } from 'antd';
+import { Modal, Input } from 'antd';
+import axios from 'axios';
+
+const { TextArea } = Input;
 
 class Navbar extends Component {
     constructor(){
@@ -30,7 +32,14 @@ class Navbar extends Component {
     handleOk = () => {
         const { newProduct } = this.state;
         const { onCreate } = this.props;
-        this.setState({ isShowing: false }, () => onCreate(newProduct));
+        this.setState({ isShowing: false }, async () => {
+            const response = await axios.post("http://localhost:3002/products", {
+                ...newProduct
+            });
+            console.log(response)
+            onCreate(newProduct);
+        });
+        //console.log(newProduct);
     };
 
   onChange = (key, e) => {
@@ -65,12 +74,12 @@ class Navbar extends Component {
                     onCancel={this.closeModalHandler}
                 >
                     <div>
-                        <h3>Add Product</h3>
-                        <Input placeholder="Enter name" onChange={e => this.onChange('name', e)} />
-                        <Input placeholder="Enter description" onChange={e => this.onChange('description', e)} />
-                        <Input placeholder="Enter price" onChange={e => this.onChange('price', e)} />
-                        <Input placeholder="Enter image url" onChange={e => this.onChange('imageUrl', e)} />
-                        <Input placeholder="Enter rating" onChange={e => this.onChange('rating', e)} />
+                        <h3 style={{textAlign:'center'}}>Add Product</h3>
+                        <Input style={{width: '80%', margin:'20px'}} placeholder="Enter name" onChange={e => this.onChange('name', e)} />
+                        <TextArea style={{width: '80%', margin:'20px'}} autosize={{ minRows: 2, maxRows: 6 }} placeholder="Enter description" onChange={e => this.onChange('description', e)} />
+                        <Input style={{width: '80%', margin:'20px'}} placeholder="Enter price" onChange={e => this.onChange('price', e)} />
+                        <Input style={{width: '80%', margin:'20px'}} placeholder="Enter image url" onChange={e => this.onChange('imageUrl', e)} />
+                        <Input style={{width: '80%', margin:'20px'}} placeholder="Enter rating" onChange={e => this.onChange('rating', e)} />
                     </div>
                 </Modal>
             </div>
