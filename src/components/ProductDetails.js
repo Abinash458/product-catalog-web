@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-//import ProductList from './ProductList';
+//import Product from './Product';
 //import Title from './Title';
 import { Link } from 'react-router-dom';
 import BtnContainer from './Button';
@@ -16,6 +16,7 @@ class ProductDetails extends Component {
       editProduct: {}
     };
   }
+  
 
   componentDidMount() {
     this.loadData();
@@ -39,37 +40,40 @@ class ProductDetails extends Component {
     });
   }
 
+
+
   render() {
+    const x = new URLSearchParams(window.location.search)
     return (
       <div>
-        <ul>
-          {this.state.products.map(product => <li>
-            {product.name}
-          </li>)}
-        </ul>
+          {x.get('name')}
+          {x.get('price')}
+          {x.get('rating')}
+          {/* <img src={x.get('imageUrl')} alt="noImage" style={{ height: 100, width: 100 }}></img> */}
+          {/* {this.state.products.map(product => <li>{product.id}</li>)} */}
+          {/* {this.state.id.map(id => <li>{x.get('id').name}</li>)} */}
         <Link to='/'>
-        <BtnContainer>
-            back to product
-        </BtnContainer>
+          <BtnContainer>
+              back to product
+          </BtnContainer>
         </Link>
         <BtnContainer onClick={this.openModalHandler} >
             edit product
         </BtnContainer>
         <Modal
-                    title="Basic Modal"
-                    visible={this.state.isShowing}
-                    onOk={this.handleOk}
-                    onCancel={this.closeModalHandler}
-                >
-                    <div>
-                        <h3 style={{textAlign:'center'}}>Add Product</h3>
-                        <Input style={{width: '80%', margin:'20px'}} placeholder="Enter name" onChange={e => this.onChange('name', e)} />
-                        <TextArea style={{width: '80%', margin:'20px'}} autosize={{ minRows: 2, maxRows: 6 }} placeholder="Enter description" onChange={e => this.onChange('description', e)} />
-                        <Input style={{width: '80%', margin:'20px'}} placeholder="Enter price" onChange={e => this.onChange('price', e)} />
-                        <Input style={{width: '80%', margin:'20px'}} placeholder="Enter image url" onChange={e => this.onChange('imageUrl', e)} />
-                        <Input style={{width: '80%', margin:'20px'}} placeholder="Enter rating" onChange={e => this.onChange('rating', e)} />
-                    </div>
-                </Modal>
+            visible={this.state.isShowing}
+            onOk={this.handleOk}
+            onCancel={this.closeModalHandler}
+        >
+          <div>
+              <h3 style={{textAlign:'center'}}>Edit Product</h3>
+              <Input style={{width: '80%', margin:'20px'}} placeholder="Enter name" onChange={e => this.onChange('name', e)} />
+              <TextArea style={{width: '80%', margin:'20px'}} autosize={{ minRows: 2, maxRows: 6 }} placeholder="Enter description" onChange={e => this.onChange('description', e)} />
+              <Input style={{width: '80%', margin:'20px'}} placeholder="Enter price" onChange={e => this.onChange('price', e)} />
+              <Input style={{width: '80%', margin:'20px'}} placeholder="Enter image url" onChange={e => this.onChange('imageUrl', e)} />
+              <Input style={{width: '80%', margin:'20px'}} placeholder="Enter rating" onChange={e => this.onChange('rating', e)} />
+          </div>
+        </Modal>
       </div>
     );
   }

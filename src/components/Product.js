@@ -6,7 +6,8 @@ import { Card } from 'antd';
 
 class Product extends Component {
     render() {
-        const { product: { name, imageUrl, price} = {} } = this.props;
+        const { product: { name, description, imageUrl, rating, price} = {} } = this.props;
+        //var x = new URLSearchParams(window.location.search)
         return (
             <div style={{ width: '30%', padding: 10, marginright: 10 }}>
                 <Card>
@@ -14,19 +15,21 @@ class Product extends Component {
                         <img src={imageUrl} alt="Noimage" style={{ height: 100, width: 100 }} />
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <h5>{name}</h5>
+                            <strong>rating: {rating}</strong>
                             <h6><strong>Rs. {price}</strong></h6>
                         </div>
                     </div>
-                    <Link to="/details">
+                    <Link to={`/details?name=${name}${price}${rating}`}>
+                        {/* {x.get('_id')} */}
                         <BtnContainer style={{ fontSize: 'small'}}>
                             Learn More
-                        </BtnContainer>
+                        </BtnContainer> 
                     </Link>
-                    </Card>
+                </Card>
             </div>
-
         );
     }
 }
+
 
 export default Product;

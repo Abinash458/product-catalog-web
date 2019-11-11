@@ -68,7 +68,6 @@ class Navbar extends Component {
                     </Link>
                 </NavWrapper>
                 <Modal
-                    title="Basic Modal"
                     visible={this.state.isShowing}
                     onOk={this.handleOk}
                     onCancel={this.closeModalHandler}

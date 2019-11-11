@@ -4,7 +4,6 @@ import './App.css';
 import Navbar from './components/Navbar';
 import ProductList from './components/ProductList';
 import ProductDetails from './components/ProductDetails';
-import Default from './components/Default';
 import "antd/dist/antd.css";
 
 class App extends Component {
@@ -19,7 +18,6 @@ class App extends Component {
         <Switch>
           <Route exact path='/' component={() => <ProductList newProduct={newProduct} /> } />
           <Route path='/details' component={ProductDetails} />
-          <Route component={Default} />
         </Switch>
       </React.Fragment>
     );
