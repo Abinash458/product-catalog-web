@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 //import Product from './Product';
-//import Title from './Title';
+// import Title from './Title';
 import { Link } from 'react-router-dom';
 import BtnContainer from './Button';
 import { Modal, Input } from 'antd';
@@ -17,45 +17,33 @@ class ProductDetails extends Component {
     };
   }
   
-
   componentDidMount() {
-    this.loadData();
+    this.getProductById();
   }
 
-  grabProductById() {
-    
-  }
-
-  loadData = async () => {
-    const response = await axios.get('http://localhost:3002/products');
-    const { data: { products } = {} } = response;
-    this.setState({ products });    
+  getProductById = async () => {
+    var x = new URLSearchParams(window.location.search);
+    var productId = x.get('id');
+    // console.log(productId);
+    const response = await axios.get(`http://localhost:3002/products/${productId}`);
+    const { data: { product } = {} } = response;
+    this.setState({ product });
+    console.log(product);
   }
 
   openModalHandler = () => {
     this.setState({
         isShowing: true
       });
-    }
-
+  }
   closeModalHandler = () => {
     this.setState({
         isShowing: false
     });
   }
-
-
-
   render() {
-    // const x = new URLSearchParams(window.location.search)
     return (
       <div>
-          {/* {x.get('name')}
-          {x.get('price')}
-          {x.get('rating')} */}
-          {/* <img src={x.get('imageUrl')} alt="noImage" style={{ height: 100, width: 100 }}></img> */}
-          {/* {this.state.products.map(product => <li>{product.id}</li>)} */}
-          {/* {this.state.id.map(id => <li>{x.get('id').name}</li>)} */}
         <Link to='/'>
           <BtnContainer>
               back to product
