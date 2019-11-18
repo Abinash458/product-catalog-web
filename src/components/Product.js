@@ -7,7 +7,6 @@ import { Card } from 'antd';
 class Product extends Component {
     render() {
         const { product: { _id, name, imageUrl, rating, price} = {} } = this.props;
-        // var x = new URLSearchParams(window.location.search)
         return (
             <div style={{ width: '30%', padding: 10, marginright: 10 }}>
                 <Card>
@@ -20,7 +19,6 @@ class Product extends Component {
                         </div>
                     </div>
                     <Link to={`/details?id=${_id}`}>
-                        {/* {x.get('id')} */}
                         <BtnContainer style={{ fontSize: 'small'}}>
                             Learn More
                         </BtnContainer> 
