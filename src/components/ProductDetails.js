@@ -22,6 +22,10 @@ class ProductDetails extends Component {
     this.loadData();
   }
 
+  grabProductById() {
+    
+  }
+
   loadData = async () => {
     const response = await axios.get('http://localhost:3002/products');
     const { data: { products } = {} } = response;
@@ -43,12 +47,12 @@ class ProductDetails extends Component {
 
 
   render() {
-    const x = new URLSearchParams(window.location.search)
+    // const x = new URLSearchParams(window.location.search)
     return (
       <div>
-          {x.get('name')}
+          {/* {x.get('name')}
           {x.get('price')}
-          {x.get('rating')}
+          {x.get('rating')} */}
           {/* <img src={x.get('imageUrl')} alt="noImage" style={{ height: 100, width: 100 }}></img> */}
           {/* {this.state.products.map(product => <li>{product.id}</li>)} */}
           {/* {this.state.id.map(id => <li>{x.get('id').name}</li>)} */}
