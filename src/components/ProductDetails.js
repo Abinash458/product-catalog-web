@@ -35,9 +35,7 @@ class ProductDetails extends Component {
     var x = new URLSearchParams(window.location.search);
     var productId = x.get('id');
     const response = await axios.delete(`http://localhost:3002/products/${productId}`);
-    const { data : { product } = {} } = response;
-    // console.log(product);
-    this.setState({ product });
+    console.log(response.data);
   }
 
   openModalHandler = () => {
