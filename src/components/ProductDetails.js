@@ -13,13 +13,23 @@ class ProductDetails extends Component {
     this.state = {
       product:[],
       isShowing: false,
-      editProduct: {}
+      // _id:'',
+      // name:'',
+      // description:'',
+      // imgUrl:'',
+      // price:'',
+      // rating:''
     };
   }
   
   componentDidMount() {
     this.getProductById();
   }
+
+  // componentWillMount() {
+  //   this.getProductDetails();
+  // }
+  
 
   openModalHandler = () => {
     this.setState({
@@ -51,6 +61,37 @@ class ProductDetails extends Component {
         this.props.history.push('/');
       }).catch(err => console.log(err));
   }
+
+  // getProductDetails() {
+  //   var x = new URLSearchParams(window.location.search);
+  //   var productId = x.get('id');
+  //   axios.get(`http://localhost:3002/products/${productId}`)
+  //   .then(response => {
+  //     this.setState({
+  //       _id: response.data._id,
+  //       name: response.data.name,
+  //       description: response.data.description,
+  //       imgUrl: response.data.imgUrl,
+  //       price: response.data.price,
+  //       rating: response.data.rating
+  //     }, () => {
+  //       console.log(this.state);
+  //     });
+  //   })
+  //   .catch(err => console.log(err));
+  // }
+
+  // onSubmit(e) {
+  //   const newProduct = {
+  //     name: this.refs.name.value,
+  //     description: this.refs.description.value,
+  //     imgUrl: this.refs.imgUrl.value,
+  //     price: this.refs.price.value,
+  //     rating: this.refs.rating.value
+  //   }
+  //   this.editProduct(newProduct);
+  //   e.preventDefault();
+  // }
 
   render() {
     return (
@@ -84,11 +125,13 @@ class ProductDetails extends Component {
         >
           <div>
               <h3 style={{textAlign:'center'}}>Edit Product</h3>
-              <Input style={{width: '80%', margin:'20px'}} placeholder="Enter name" onChange={e => this.onChange('name', e)} />
-              <TextArea style={{width: '80%', margin:'20px'}} autosize={{ minRows: 2, maxRows: 6 }} placeholder="Enter description" onChange={e => this.onChange('description', e)} />
-              <Input style={{width: '80%', margin:'20px'}} placeholder="Enter price" onChange={e => this.onChange('price', e)} />
-              <Input style={{width: '80%', margin:'20px'}} placeholder="Enter image url" onChange={e => this.onChange('imageUrl', e)} />
-              <Input style={{width: '80%', margin:'20px'}} placeholder="Enter rating" onChange={e => this.onChange('rating', e)} />
+              {/* <form onSubmit={this.onSubmit.bind(this)}> */}
+              <Input style={{width: '80%', margin:'20px'}} name="name" ref="name" placeholder="Enter name" />
+              <TextArea style={{width: '80%', margin:'20px'}} autosize={{ minRows: 2, maxRows: 6 }} name="description" ref="description" placeholder="Enter description" />
+              <Input style={{width: '80%', margin:'20px'}} name="price" ref="price" placeholder="Enter price" />
+              <Input style={{width: '80%', margin:'20px'}} name="imgUrl" ref="imgUrl" placeholder="Enter image url" />
+              <Input style={{width: '80%', margin:'20px'}} name="rating" ref="rating" placeholder="Enter rating" />
+              {/* </form> */}
           </div>
         </Modal>
       </div>
