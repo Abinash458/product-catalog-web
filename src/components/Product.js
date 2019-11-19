@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 //import styled from 'styled-components';
+import './product.css';
 import { Link } from 'react-router-dom';
 import BtnContainer from './Button'
 import { Card } from 'antd';
@@ -9,7 +10,7 @@ class Product extends Component {
         const { product: { _id, name, imageUrl, rating, price} = {} } = this.props;
         return (
             <div style={{ width: '30%', padding: 10, marginright: 10 }}>
-                <Card>
+                <Card className="card">
                     <div style={{ display: 'flex' }}>
                         <img src={imageUrl} alt="Noimage" style={{ height: 100, width: 100 }} />
                         <div style={{ display: 'flex', flexDirection: 'column' }}>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-//import Product from './Product';
-// import Title from './Title';
+import Title from './Title';
 import { Link } from 'react-router-dom';
+import './productdetails.css';
 import BtnContainer from './Button';
 import { Modal, Input } from 'antd';
 const { TextArea } = Input;
@@ -11,7 +11,7 @@ class ProductDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products:[],
+      product:[],
       isShowing: false,
       editProduct: {}
     };
@@ -26,32 +26,57 @@ class ProductDetails extends Component {
     var productId = x.get('id');
     // console.log(productId);
     const response = await axios.get(`http://localhost:3002/products/${productId}`);
-    const { data: { product } = {} } = response;
+    const { data : { product } = {} } = response;
+    // console.log(product);
     this.setState({ product });
-    console.log(product);
+  }
+
+  deleteProduct = async () => {
+    var x = new URLSearchParams(window.location.search);
+    var productId = x.get('id');
+    const response = await axios.delete(`http://localhost:3002/products/${productId}`);
+    const { data : { product } = {} } = response;
+    // console.log(product);
+    this.setState({ product });
   }
 
   openModalHandler = () => {
     this.setState({
         isShowing: true
-      });
+    });
   }
+
   closeModalHandler = () => {
     this.setState({
         isShowing: false
     });
   }
+
   render() {
     return (
       <div>
-        <Link to='/'>
-          <BtnContainer>
-              back to product
-          </BtnContainer>
-        </Link>
-        <BtnContainer onClick={this.openModalHandler} >
-            edit product
-        </BtnContainer>
+        <Title name={this.state.product.name} />
+        <div className="row">
+          <div className="col-6">
+            <img className="imageStyle" src={this.state.product.imageUrl} alt="Noimage" />
+          </div>
+          <div className="col-6">
+              <BtnContainer onClick={this.deleteProduct} style={{ background: 'red', marginLeft: "80%", marginBottom: "20%" }}>
+                  Delete
+              </BtnContainer>
+            <p style={{ textAlign: 'center', fontSize: "20px" }}>{this.state.product.description}</p>
+            <p style={{ fontSize: "20px", fontWeight: 'bold' }}>Rs.{this.state.product.price}</p>
+            <p style={{ fontSize: "20px", fontWeight: 'bold' }}>Rating {this.state.product.rating}</p>
+            <Link to='/'>
+              <BtnContainer>
+                  back to product
+              </BtnContainer>
+            </Link>
+            <BtnContainer onClick={this.openModalHandler} >
+                edit product
+            </BtnContainer>
+          </div>
+        </div>
         <Modal
             visible={this.state.isShowing}
             onOk={this.handleOk}
