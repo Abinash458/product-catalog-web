@@ -81,8 +81,7 @@ class Navbar extends Component {
                         <Input style={{width: '80%', margin:'20px'}} placeholder="Enter rating" onChange={e => this.onChange('rating', e)} />
                     </div>
                 </Modal>
-            </div>
-            
+            </div>  
         );
     }
 }

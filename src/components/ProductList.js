@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-//import HttpService from '../services/HttpService';
 import Product from './Product';
 import Title from './Title';
 import axios from 'axios';
 
-// const http = new HttpService();
 
 class ProductList extends Component {
   constructor(props) {
@@ -31,14 +29,12 @@ class ProductList extends Component {
     }
   }
 
-  //returning the promise
   loadData = async () => {
     const response = await axios.get('http://localhost:3002/products');
     const { data: { products } = {} } = response;
     this.setState({ products });
   }
 
-  //returning multiple data
   listProduct = () => {
     const { products = [] } = this.state;
     const list = products.map((product) =>  <Product product={product} key={product._id} />);
