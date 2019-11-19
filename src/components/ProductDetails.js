@@ -21,23 +21,6 @@ class ProductDetails extends Component {
     this.getProductById();
   }
 
-  getProductById = async () => {
-    var x = new URLSearchParams(window.location.search);
-    var productId = x.get('id');
-    // console.log(productId);
-    const response = await axios.get(`http://localhost:3002/products/${productId}`);
-    const { data : { product } = {} } = response;
-    // console.log(product);
-    this.setState({ product });
-  }
-
-  deleteProduct = async () => {
-    var x = new URLSearchParams(window.location.search);
-    var productId = x.get('id');
-    const response = await axios.delete(`http://localhost:3002/products/${productId}`);
-    console.log(response.data);
-  }
-
   openModalHandler = () => {
     this.setState({
         isShowing: true
@@ -50,6 +33,25 @@ class ProductDetails extends Component {
     });
   }
 
+  getProductById = async () => {
+    var x = new URLSearchParams(window.location.search);
+    var productId = x.get('id');
+    // console.log(productId);
+    const response = await axios.get(`http://localhost:3002/products/${productId}`);
+    const { data : { product } = {} } = response;
+    // console.log(product);
+    this.setState({ product });
+  }
+
+  deleteProduct(){
+    var x = new URLSearchParams(window.location.search);
+    var productId = x.get('id');
+    axios.delete(`http://localhost:3002/products/${productId}`)
+      .then(response => {
+        this.props.history.push('/');
+      }).catch(err => console.log(err));
+  }
+
   render() {
     return (
       <div>
@@ -59,7 +61,7 @@ class ProductDetails extends Component {
             <img className="imageStyle" src={this.state.product.imageUrl} alt="Noimage" />
           </div>
           <div className="col-6">
-              <BtnContainer onClick={this.deleteProduct} style={{ background: 'red', marginLeft: "80%", marginBottom: "20%" }}>
+              <BtnContainer onClick={this.deleteProduct.bind(this)} style={{ background: 'red', marginLeft: "80%", marginBottom: "20%" }}>
                   Delete
               </BtnContainer>
             <p style={{ textAlign: 'center', fontSize: "20px" }}>{this.state.product.description}</p>
